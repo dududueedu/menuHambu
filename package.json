@@ -1,0 +1,20 @@
+{
+  "name": "menuhambu",
+  "version": "1.0.0",
+  "description": "Project to menu Burger",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Eduardo Dev",
+  "license": "MIT",
+  "info": {
+    "create-package-config": "npm init -y",
+    "install-tailwindcss": "npm install -D tailwindcss",
+    "file-config": "npx tailwindcss init"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.6"
+  }
+}
