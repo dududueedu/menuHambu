@@ -12,6 +12,7 @@ const addressWarnModal = document.getElementById("address-warn")
 let listCart = []
 
 cartBtnFooter.addEventListener("click", function() {
+    updateCart()
     modalView.style.display = "flex"
 })
 
@@ -51,5 +52,38 @@ function addToCart (name, price) {
         })
     }
 
-    console.log(listCart)
+    updateCart()
+}
+
+//update cart
+function updateCart (){
+    cartItemsModal.innerHTML = "";
+    let total = 0;
+
+    listCart.forEach(item => {
+        const cartElements = document.createElement("div");
+        cartElements.classList.add("flex", "justify-between", "mt-4", "flex-col")
+
+        cartElements.innerHTML = `
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="font-medium">${item.name}</p>
+                    <p>Qtd: ${item.qtd}</p>
+                    <p class="font-medium mt-3">R$ ${item.price}</p>
+                </div>
+
+                <button>
+                    Remover
+                </button>
+            </div>
+            
+        `
+        total += item.qtd * item.price
+
+        cartItemsModal.appendChild(cartElements)
+    })
+    ValueTotalModal.textContent = total.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    })
 }
