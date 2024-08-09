@@ -86,4 +86,7 @@ function updateCart (){
         style: "currency",
         currency: "BRL"
     })
+
+    qtdItemsFooter.innerHTML = listCart.length
+
 }
