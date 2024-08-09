@@ -72,7 +72,7 @@ function updateCart (){
                     <p class="font-medium mt-3">R$ ${item.price}</p>
                 </div>
 
-                <button>
+                <button class="remove-btn" data-name="${item.name}">
                     Remover
                 </button>
             </div>
@@ -89,4 +89,31 @@ function updateCart (){
 
     qtdItemsFooter.innerHTML = listCart.length
 
+}
+
+// function remove
+cartItemsModal.addEventListener("click", function(event){
+    if(event.target.classList.contains("remove-btn")){
+        const nameVar = event.target.getAttribute("data-name")
+
+        removeItem(nameVar)
+    }
+})
+
+function removeItem(name){
+    const index = listCart.findIndex(item => item.name === name) 
+
+    if (index !== -1) {
+    
+        const item = listCart[index]
+
+        if(item.qtd > 1){
+            item.qtd -= 1
+            updateCart()
+            return
+        }else{
+            listCart.splice(index, 1)
+            updateCart()
+        }
+    }
 }
