@@ -117,3 +117,21 @@ function removeItem(name){
         }
     }
 }
+
+addressInputModal.addEventListener("input", function(event){
+    let address = event.target.value
+
+    if(address !== ""){
+        addressWarnModal.classList.add("hidden")
+        addressInputModal.classList.remove("border-red-600")
+    }
+})
+
+requestModal.addEventListener("click", function(event){
+    if(listCart.length === 0) return
+    else if(addressInputModal.value === ""){
+        addressWarnModal.classList.remove("hidden")
+        addressInputModal.classList.add("border-red-600")
+        return
+    }
+})
