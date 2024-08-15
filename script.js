@@ -132,7 +132,17 @@ requestModal.addEventListener("click", function(event){
     
     const isOpen = checkOpen()
     if(!isOpen){
-        alert("Hamburgueria fechada no momento :)")
+        Toastify({
+            text: "Ops, serviço indisponível!",
+            duration: 4000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+              background: "rgb(220 38 38)",
+            },
+        }).showToast();
         return
     }
 
@@ -162,7 +172,7 @@ requestModal.addEventListener("click", function(event){
 
 function checkOpen(){
     const data = new Date()
-    return data.getHours() >= 18 && data.getHours() < 22
+    return data.getHours() <= 18 && data.getHours() < 22
 }
 
 const divDateOpen = document.getElementById("div-date-open")
