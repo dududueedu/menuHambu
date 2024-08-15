@@ -127,11 +127,50 @@ addressInputModal.addEventListener("input", function(event){
     }
 })
 
+// finalizar pedido
 requestModal.addEventListener("click", function(event){
+    
+    const isOpen = checkOpen()
+    if(!isOpen){
+        alert("Hamburgueria fechada no momento :)")
+        return
+    }
+
     if(listCart.length === 0) return
     else if(addressInputModal.value === ""){
         addressWarnModal.classList.remove("hidden")
         addressInputModal.classList.add("border-red-600")
         return
     }
+
+    const cartRequest = listCart.map((prod) => {
+        return (
+            `(${prod.name}, Qtd: ${prod.qtd}, Valor: ${prod.price}) | `
+        )
+    }).join("")
+
+    const message = encodeURIComponent(cartRequest)
+    const phone = "85996511130"
+
+    window.open(`https://wa.me/${phone}?text=Meu pedido: ${message} - Meu endereço: ${addressInputModal.value}`, "_blank")
+
+    listCart = []
+    updateCart()
+    addressInputModal.value = ""
+    console.log(cartRequest)
 })
+
+function checkOpen(){
+    const data = new Date()
+    return data.getHours() >= 18 && data.getHours() < 22
+}
+
+const divDateOpen = document.getElementById("div-date-open")
+
+if(checkOpen()) {
+    divDateOpen.classList.remove("bg-red-600")
+    divDateOpen.classList.add("bg-green-600")
+}else{
+    divDateOpen.classList.remove("bg-green-600")
+    divDateOpen.classList.add("bg-red-600")
+}
